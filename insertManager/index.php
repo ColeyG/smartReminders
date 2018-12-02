@@ -46,10 +46,10 @@
                             echo "<td>";
                             echo $row['todo_time'];
                             echo "</td>";
-                            echo "<td class='delete' id='";
+                            echo "<td>";
+                            echo "<a href='#' class='delete' id='";
                             echo $row['todo_id'];
-                            echo "'>";
-                            echo "X";
+                            echo "'>X</a>";
                             echo "</td>";
                             echo "</tr>";
                         }

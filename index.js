@@ -6,11 +6,11 @@ var cron = require('node-cron');
 const axios = require('axios');
 
 axios.get('http://localhost/smartReminders/endpoint/responder.php')
-  .then(function (response) {
-    console.log(response.data);
-  })
-  .catch(function (error) {
-    console.log(error);
+            .then(function (response) {
+                console.log(response.data[0]);
+            })
+            .catch(function (error) {
+                console.log(error);
 });
 
 client.on('ready', () => {
@@ -24,10 +24,38 @@ client.on('message', message => {
     //if(message.content!='😎'){message.channel.send('😎');}
 });
 
-cron.schedule('00 9,10,11,12,13,14,15,16,17,18,19,20,21 * * *', () => {
+let goodSchedule = '00 9,10,11,12,13,14,15,16,17,18,19,20,21 * * *';
+let testSchedule = '* * * * *';
+
+cron.schedule(goodSchedule, () => {
   var guild = client.guilds.get(settings.guildId);
         if(guild && guild.channels.get(settings.channelId)){
-            guild.channels.get(settings.channelId).send("message at: "+moment().unix());
+
+            axios.get('http://colegeerts.com/endpoint/responder.php')
+            .then(function (response) {
+                let nothingMessage = "Nothing to display";
+                let newMessage="";
+
+                for(let i=0;i<response.data.length;i++){
+                    newMessage+=response.data[i].todo_thing;
+                    if(response.data[i].time==" "){
+                        newMessage+="\n";
+                    }else{
+                        newMessage+=" at: "+response.data[i].todo_time+"\n";
+                    }
+                }
+
+                if(newMessage!=""){
+                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== \n"+newMessage);
+                }else{
+                    guild.channels.get(settings.channelId).send(nothingMessage);
+                }
+                
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
             console.log("auto-message success "+moment().unix());
         } else {
             console.log("auto-message failed "+moment().unix());

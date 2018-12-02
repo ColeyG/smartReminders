@@ -73,3 +73,11 @@ label{
 .delete{
     cursor: pointer;
 }
+@media (max-width:800px){
+    .list{
+        width:90%;
+    }
+    .items{
+        width:85%;
+    }
+}
