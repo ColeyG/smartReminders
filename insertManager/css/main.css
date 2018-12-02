@@ -70,3 +70,6 @@ label{
     text-align: center;
     padding-top:5px;
 }
+.delete{
+    cursor: pointer;
+}

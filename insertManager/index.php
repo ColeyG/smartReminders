@@ -46,15 +46,14 @@
                             echo "<td>";
                             echo $row['todo_time'];
                             echo "</td>";
-                            echo "<td>";
+                            echo "<td class='delete' id='";
+                            echo $row['todo_id'];
+                            echo "'>";
                             echo "X";
                             echo "</td>";
                             echo "</tr>";
                         }
                     ?>
-                        <!-- <td>The table body</td>
-                        <td>with two columns</td>
-                        <td>X</td> -->
                     </tr>
                 </tbody>
             </table>
