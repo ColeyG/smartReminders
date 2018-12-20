@@ -20,26 +20,14 @@ client.on('message', message => {
     }
 });
 
-let weekendSchedule = '00 10,11,12,13,14,15,16,17,18,19,20,21,22,23,00 * * *';
-let weekSchedule = '00 7,8,9,17,18,19,20,21,22,23,00 * * *';
-let testSchedule = '* * * * *';
-let thisSchedule = weekendSchedule;
-let schedMark = 'wk';
+let reminderSchedule=[
+    '00 10,11,12,13,14,15,16,17,18,19,20,21,22,23,00 * * *',
+    '00 7,8,9,17,18,19,20,21,22,23,00 * * *'
+];
 
-cron.schedule('30 18 * * 5',()=>{
-    //changing to weekends, fires friday night
-    thisSchedule=weekendSchedule;
-    schedMark='wknd';
-});
-
-cron.schedule('30 00 * * *',()=>{
-    //changing to weekdays, fires on monday morning
-    thisSchedule=weekSchedule;
-    schedMark='wk';
-});
-
-cron.schedule(thisSchedule, () => {
-  var guild = client.guilds.get(settings.guildId);
+reminderSchedule.forEach(element,()=>{
+    cron.schedule(element,()=>{
+        var guild = client.guilds.get(settings.guildId);
         if(guild && guild.channels.get(settings.channelId)){
 
             axios.get('http://colegeerts.com/endpoint/responder.php')
@@ -71,6 +59,7 @@ cron.schedule(thisSchedule, () => {
         } else {
             console.log("auto-message failed "+moment().unix());
         }
+    });
 });
 
 client.login(settings.token);
