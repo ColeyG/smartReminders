@@ -5,14 +5,6 @@ const client = new Discord.Client();
 var cron = require('node-cron');
 const axios = require('axios');
 
-axios.get('http://localhost/smartReminders/endpoint/responder.php')
-            .then(function (response) {
-                console.log(response.data[0]);
-            })
-            .catch(function (error) {
-                console.log(error);
-});
-
 client.on('ready', () => {
     client.generateInvite(["ADMINISTRATOR"]).then(link =>{
         console.log('You can add a discord bot here: '+link);
@@ -21,13 +13,32 @@ client.on('ready', () => {
 
 client.on('message', message => {
     //Every time the server is messaged (no matter the channel) these events occur
-    //if(message.content!='😎'){message.channel.send('😎');}
+    if(message.content.includes('t!')){
+        let time=message.content.split(" ")[1];
+        //message.channel.send("Counting");
+        setTimeout(function(){message.channel.send(time)},time*60000);
+    }
 });
 
-let goodSchedule = '00 9,10,11,12,13,14,15,16,17,18,19,20,21 * * *';
+let weekendSchedule = '00 10,11,12,13,14,15,16,17,18,19,20,21,22,23,00 * * *';
+let weekSchedule = '00 7,8,9,17,18,19,20,21,22,23,00 * * *';
 let testSchedule = '* * * * *';
+let thisSchedule = weekendSchedule;
+let schedMark = 'wk';
 
-cron.schedule(goodSchedule, () => {
+cron.schedule('30 18 * * 5',()=>{
+    //changing to weekends, fires friday night
+    thisSchedule=weekendSchedule;
+    schedMark='wknd';
+});
+
+cron.schedule('30 00 * * *',()=>{
+    //changing to weekdays, fires on monday morning
+    thisSchedule=weekSchedule;
+    schedMark='wk';
+});
+
+cron.schedule(thisSchedule, () => {
   var guild = client.guilds.get(settings.guildId);
         if(guild && guild.channels.get(settings.channelId)){
 
@@ -41,12 +52,12 @@ cron.schedule(goodSchedule, () => {
                     if(response.data[i].time==" "){
                         newMessage+="\n";
                     }else{
-                        newMessage+=" at: "+response.data[i].todo_time+"\n";
+                        newMessage+="  "+response.data[i].todo_time+"\n";
                     }
                 }
 
                 if(newMessage!=""){
-                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== \n"+newMessage);
+                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== "+schedMark+" \n"+newMessage);
                 }else{
                     guild.channels.get(settings.channelId).send(nothingMessage);
                 }
