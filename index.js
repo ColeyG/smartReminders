@@ -21,11 +21,11 @@ client.on('message', message => {
 });
 
 let reminderSchedule=[
-    '00 10,11,12,13,14,15,16,17,18,19,20,21,22,23,00 * * *',
-    '00 7,8,9,17,18,19,20,21,22,23,00 * * *'
+    '00 8,9,16,17,18,19,20,21,22,23,00 * * mon,tue,wed,thu,fri',
+    '00 10,11,12,13,14,15,16,17,18,19,20,21,22,23,00 * * sat,sun'
 ];
 
-reminderSchedule.forEach(element,()=>{
+reminderSchedule.forEach((element)=>{
     cron.schedule(element,()=>{
         var guild = client.guilds.get(settings.guildId);
         if(guild && guild.channels.get(settings.channelId)){
