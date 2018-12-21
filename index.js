@@ -9,6 +9,11 @@ client.on('ready', () => {
     client.generateInvite(["ADMINISTRATOR"]).then(link =>{
         console.log('You can add a discord bot here: '+link);
     });
+
+    let guild = client.guilds.get(settings.guildId);
+        if(guild && guild.channels.get(settings.channelId)){
+            guild.channels.get(settings.channelId).send("Server on!");
+        }
 });
 
 client.on('message', message => {
@@ -41,7 +46,7 @@ let reminderSchedule=[
 
 reminderSchedule.forEach((element)=>{
     cron.schedule(element,()=>{
-        var guild = client.guilds.get(settings.guildId);
+        let guild = client.guilds.get(settings.guildId);
         if(guild && guild.channels.get(settings.channelId)){
 
             axios.get('http://colegeerts.com/endpoint/responder.php')
