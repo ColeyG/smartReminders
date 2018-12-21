@@ -21,8 +21,8 @@ client.on('message', message => {
 });
 
 let reminderSchedule=[
-    '00 8,9,16,17,18,19,20,21,22,23,00 * * mon,tue,wed,thu,fri',
-    '00 10,11,12,13,14,15,16,17,18,19,20,21,22,23,00 * * sat,sun'
+    '00 8,9,16,17,18,19,20,21,22,23,00 * * 1,2,3,4,5',
+    '00 10,11,12,13,14,15,16,17,18,19,20,21,22,23 * * 0,6'
 ];
 
 reminderSchedule.forEach((element)=>{
@@ -45,7 +45,7 @@ reminderSchedule.forEach((element)=>{
                 }
 
                 if(newMessage!=""){
-                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== "+schedMark+" \n"+newMessage);
+                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== "+" \n"+newMessage);
                 }else{
                     guild.channels.get(settings.channelId).send(nothingMessage);
                 }
