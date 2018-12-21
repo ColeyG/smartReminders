@@ -5,8 +5,6 @@ const client = new Discord.Client();
 var cron = require('node-cron');
 const axios = require('axios');
 
-let basdfeep;
-
 client.on('ready', () => {
     client.generateInvite(["ADMINISTRATOR"]).then(link =>{
         console.log('You can add a discord bot here: '+link);
