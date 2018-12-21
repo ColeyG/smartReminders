@@ -15,8 +15,22 @@ client.on('message', message => {
     //Every time the server is messaged (no matter the channel) these events occur
     if(message.content.includes('t!')){
         let time=message.content.split(" ")[1];
-        //message.channel.send("Counting");
+        message.channel.send("Got it");
         setTimeout(function(){message.channel.send(time)},time*60000);
+    }
+    
+    if(message.content.includes('tp!')){
+        let time=message.content.split(" ")[1];
+        let actionItem=message.content.split(" ")[2];
+        message.channel.send("Got it");
+        setTimeout(function(){message.channel.send(actionItem)},time*60000);
+    }
+    
+    if(message.content.includes('tp!')){
+        let time=message.content.split(" ")[1];
+        let actionItem=message.content.split(" ")[2];
+        message.channel.send("Got it");
+        setTimeout(function(){message.channel.send(actionItem)},time*60000);
     }
 });
 
