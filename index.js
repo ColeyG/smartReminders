@@ -18,6 +18,10 @@ client.on('ready', () => {
         }
 });
 
+client.on('error',(error)=>{
+    console.log('error occured: '+error);
+});
+
 client.on('message', message => {
     //Every time the server is messaged (no matter the channel) these events occur
     if(message.content.includes('t!')){
