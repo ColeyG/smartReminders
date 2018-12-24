@@ -4,6 +4,7 @@ var moment = require('moment');
 const client = new Discord.Client();
 var cron = require('node-cron');
 const axios = require('axios');
+const util = require('util'); 
 
 let beep;
 
@@ -19,11 +20,17 @@ client.on('ready', () => {
 });
 
 client.on('error',(error)=>{
-    console.log('error occured: '+error);
+    console.log('error occured: '+ util.inspect(error));
 });
 
 client.on('message', message => {
     //Every time the server is messaged (no matter the channel) these events occur
+    message.content=message.content.toLowerCase();
+
+    if(message.content.includes('hi')||message.content.includes('hey')){
+        message.channel.send('Hey');
+    }
+
     if(message.content.includes('t!')){
         let time=message.content.split(" ")[1];
         message.channel.send("Got it");
