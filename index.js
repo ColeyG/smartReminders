@@ -28,7 +28,7 @@ client.on('message', message => {
     message.content=message.content.toLowerCase();
 
     if(message.content.includes('hi')||message.content.includes('hey')){
-        message.channel.send('Hey');
+        message.channel.send("Ping");
     }
 
     if(message.content.includes('t!')){
