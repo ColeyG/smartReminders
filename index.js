@@ -23,11 +23,22 @@ client.on('error',(error)=>{
     console.log('error occured: '+ util.inspect(error));
 });
 
+let reminderSchedule=[
+    '00 8,9,11,13,15,17,18,19,20,21,22,23 * * 1,2,3,4,5',
+    '00 11,12,13,14,15,16,17,18,19,20,21,22,23 * * 0,6',
+    '* * * * *'
+];
+
+let reviewSchedule=[
+    '30 22 * * *'
+],
+reviewFieldMessage="Did I do my best to? |Be Happy|Learn|Cassie|Fitness|";
+
 client.on('message', message => {
     //Every time the server is messaged (no matter the channel) these events occur
     message.content=message.content.toLowerCase();
 
-    if(message.content.includes('hi')||message.content.includes('hey')){
+    if(message.content.includes('hey')){
         message.channel.send("Ping");
     }
 
@@ -50,12 +61,32 @@ client.on('message', message => {
         message.channel.send("Got it");
         setTimeout(function(){message.channel.send(actionItem)},time*60000);
     }
-});
 
-let reminderSchedule=[
-    '00 8,9,11,13,15,17,18,19,20,21,22,23 * * 1,2,3,4,5',
-    '00 11,12,13,14,15,16,17,18,19,20,21,22,23 * * 0,6'
-];
+    if(message.content.includes('rr!')){
+        message.channel.send(reviewFieldMessage);
+    }
+
+    if(message.content.includes('rv!')){
+        let reviewResponses=message.content.split(" ");
+        message.channel.send(reviewResponses[1]+" - "+reviewResponses[2]+" - "+reviewResponses[3]+" - "+reviewResponses[4]);
+
+        let url='http://colegeerts.com/endpoint/responder.php?do=review&1='+
+        reviewResponses[1]+'&2='+
+        reviewResponses[2]+'&3='+
+        reviewResponses[3]+'&4='+
+        reviewResponses[4];
+
+        console.log(url);
+
+        axios.get(url)
+            .then(function (response) {
+                message.channel.send(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+});
 
 reminderSchedule.forEach((element)=>{
     cron.schedule(element,()=>{
@@ -90,6 +121,15 @@ reminderSchedule.forEach((element)=>{
             console.log("auto-message success "+moment().unix());
         } else {
             console.log("auto-message failed "+moment().unix());
+        }
+    });
+});
+
+reviewSchedule.forEach((element)=>{
+    cron.schedule(element,()=>{
+        let guild = client.guilds.get(settings.guildId);
+        if(guild && guild.channels.get(settings.channelId)){
+            guild.channels.get(settings.channelId).send("Time to Review!");
         }
     });
 });
