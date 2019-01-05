@@ -3,6 +3,8 @@ require_once('connect.php');
 
 $instruction=$_GET["do"];
 
+$amount=$_GET["amount"];
+
 $r1=$_GET['1'];
 $r2=$_GET['2'];
 $r3=$_GET['3'];
@@ -27,13 +29,35 @@ if($instruction==="review"){
     }
 }
 
-if($instruction==="history"){
-    $revS="SELECT * FROM tbl_review ORDER BY rev_id DESC";
+if($instruction==="hpp"){
+    $revS="SELECT * FROM tbl_review ORDER BY rev_id asc";
     $revQ=mysqli_query($link,$revS);
+
+    $arraySome='';
+    echo "[";
+    while($row= mysqli_fetch_array($revQ)){
+        $arraySome.= $row['rev_hpp'].",";
+    }
+    $arraySome=substr($arraySome, 0, -1);
+    echo $arraySome;
+    echo "]";
+}
+
+if($instruction==="history"){
+    $revS="SELECT * FROM tbl_review ORDER BY rev_id desc limit {$amount}";
+    $revQ=mysqli_query($link,$revS);
+    echo "Past Reviews \n";
+    echo "Chart: http://colegeerts.com/endpoint/chart.html \n";
+    echo "Happiness/Learn/Social/Fitness \n";
     if($revQ){
-        echo "bing";
+        while($row= mysqli_fetch_array($revQ)){
+            echo $row['rev_hpp']."-";
+            echo $row['rev_ln']."-";
+            echo $row['rev_scl']."-";
+            echo $row['rev_ftn']."\n";
+        }
     }else{
-        echo "bong";
+        echo "Error getting history.";
     }
 }
 

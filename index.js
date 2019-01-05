@@ -31,7 +31,7 @@ let reminderSchedule=[
 let reviewSchedule=[
     '30 22 * * *'
 ],
-reviewFieldMessage="Did I do my best to? |Be Happy|Learn|Cassie|Fitness|";
+reviewFieldMessage="Did I do my best to? |Be Happy|Learn|Social|Fitness|";
 
 client.on('message', message => {
     //Every time the server is messaged (no matter the channel) these events occur
@@ -65,6 +65,21 @@ client.on('message', message => {
         message.channel.send(reviewFieldMessage);
     }
 
+    if(message.content.includes('rh!')){
+        let amount=message.content.split(' ')[1];
+        if(amount===undefined){amount=5;}
+        if(amount=='all'){amount=1000}
+        let url='http://colegeerts.com/endpoint/responder.php?do=history&amount='+amount;
+
+        axios.get(url)
+            .then(function (response) {
+                message.channel.send(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+        });
+    }
+
     if(message.content.includes('rv!')){
         let reviewResponses=message.content.split(" ");
         message.channel.send(reviewResponses[1]+" - "+reviewResponses[2]+" - "+reviewResponses[3]+" - "+reviewResponses[4]);
@@ -83,7 +98,7 @@ client.on('message', message => {
             })
             .catch(function (error) {
                 console.log(error);
-            });
+        });
     }
 });
 
