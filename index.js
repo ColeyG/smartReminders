@@ -122,7 +122,7 @@ reminderSchedule.forEach((element)=>{
                 }
 
                 if(newMessage!=""){
-                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== http://colegeerts.com/endpoint/responder.php"+" \n"+newMessage);
+                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== http://colegeerts.com/reminders"+" \n"+newMessage);
                 }else{
                     guild.channels.get(settings.channelId).send(nothingMessage);
                 }
@@ -143,7 +143,7 @@ reviewSchedule.forEach((element)=>{
     cron.schedule(element,()=>{
         let guild = client.guilds.get(settings.guildId);
         if(guild && guild.channels.get(settings.channelId)){
-            guild.channels.get(settings.channelId).send("Time to Review!");
+            guild.channels.get(settings.channelId).send("Time to Review! Writing: http://colegeerts.com/master/");
         }
     });
 });
