@@ -29,25 +29,11 @@ if($instruction==="review"){
     }
 }
 
-if($instruction==="hpp"){
-    $revS="SELECT * FROM tbl_review ORDER BY rev_id asc";
-    $revQ=mysqli_query($link,$revS);
-
-    $arraySome='';
-    echo "[";
-    while($row= mysqli_fetch_array($revQ)){
-        $arraySome.= $row['rev_hpp'].",";
-    }
-    $arraySome=substr($arraySome, 0, -1);
-    echo $arraySome;
-    echo "]";
-}
-
 if($instruction==="history"){
     $revS="SELECT * FROM tbl_review ORDER BY rev_id desc limit {$amount}";
     $revQ=mysqli_query($link,$revS);
     echo "Past Reviews \n";
-    echo "Chart: http://colegeerts.com/endpoint/chart.html \n";
+    //echo "Chart: http://colegeerts.com/endpoint/chart.html \n";
     echo "Happiness/Learn/Social/Fitness \n";
     if($revQ){
         while($row= mysqli_fetch_array($revQ)){

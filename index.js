@@ -122,7 +122,7 @@ reminderSchedule.forEach((element)=>{
                 }
 
                 if(newMessage!=""){
-                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== "+" \n"+newMessage);
+                    guild.channels.get(settings.channelId).send("ToDo List:\n ========== http://colegeerts.com/endpoint/responder.php"+" \n"+newMessage);
                 }else{
                     guild.channels.get(settings.channelId).send(nothingMessage);
                 }
