@@ -1,6 +1,6 @@
 {
     "token": "bot_token_here",
-    "guildId":"guildIdForPushMessaging",
-    "channelId":"channelIdForPushMessaging",
-    "dbUrl":"some dbUrl here"
+    "guildId": "guildIdForPushMessaging",
+    "channelId": "channelIdForPushMessaging",
+    "dbUrl": "some dbUrl here"
 }
