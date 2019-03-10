@@ -1,7 +1,7 @@
 <?php
     require_once('php/connect.php');
     
-    $todosS='SELECT * FROM tbl_todo';
+    $todosS='SELECT * FROM tbl_todo where completion = 0 order by sort ASC';
     $todosQ=mysqli_query($link,$todosS);
 
     mysqli_close($link);

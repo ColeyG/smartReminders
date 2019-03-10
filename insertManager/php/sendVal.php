@@ -5,7 +5,7 @@
     require_once('connect.php');
 
     if (trim($thing)!=""){
-        $subS="INSERT INTO tbl_todo VALUES(null,'{$thing}','{$time}')";
+        $subS="INSERT INTO tbl_todo VALUES(null,'{$thing}','{$time}',10,0)";
     $subQ=mysqli_query($link,$subS);
     }
 
