@@ -4,6 +4,9 @@
     $todosS='SELECT * FROM tbl_todo where completion = 0 order by sort ASC';
     $todosQ=mysqli_query($link,$todosS);
 
+    $completedS='SELECT * FROM tbl_todo where completion != 0 order by sort ASC';
+    $completedQ=mysqli_query($link,$completedS);
+
     mysqli_close($link);
 ?>
 <!DOCTYPE html>
@@ -49,7 +52,41 @@
                             echo "<td>";
                             echo "<a href='#' class='delete' id='";
                             echo $row['todo_id'];
-                            echo "'>X</a>";
+                            echo "'>❌</a>";
+                            echo "<a href='#' class='complete' id='";
+                            echo $row['todo_id'];
+                            echo "'>✔️</a>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    ?>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="items">
+            <table>
+                <thead>
+                    
+                </thead>
+                <tbody>
+                    <tr>
+                    <?php
+                        while($row = mysqli_fetch_array($completedQ)){
+                            echo "<tr class='completion".$row['completion']."'>";
+                            echo "<td>";
+                            echo $row['todo_thing'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['todo_time'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo "<a href='#' class='remove' id='";
+                            echo $row['todo_id'];
+                            echo "'>🚫</a>";
+                            echo "<a href='#' class='reset' id='";
+                            echo $row['todo_id'];
+                            echo "'>🔺</a>";
                             echo "</td>";
                             echo "</tr>";
                         }

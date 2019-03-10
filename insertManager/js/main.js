@@ -4,6 +4,9 @@ let time = document.querySelector('#time');
 let submit = document.querySelector('#submit');
 document.querySelector('.wrapper').style.backgroundColor = "hsl(" + color + ",70%,70%)";
 let deleteButtons = document.querySelectorAll('.delete');
+let successButtons = document.querySelectorAll('.complete');
+let resetButtons = document.querySelectorAll('.reset');
+let removeButtons = document.querySelectorAll('.remove');
 
 function returned(data) {
     console.log(data);
@@ -13,7 +16,19 @@ function returned(data) {
 }
 
 function deleteItem() {
-    coldAjax("GET", "php/delete.php?id=" + this.id, returned);
+    coldAjax("GET", "php/delete.php?id=" + this.id + "&code=2", returned);
+}
+
+function successItem() {
+    coldAjax("GET", "php/delete.php?id=" + this.id + "&code=1", returned);
+}
+
+function resetItem() {
+    coldAjax("GET", "php/delete.php?id=" + this.id + "&code=0", returned);
+}
+
+function removeItem() {
+    coldAjax("GET", "php/delete.php?id=" + this.id + "&code=3", returned);
 }
 
 function submitAct() {
@@ -24,4 +39,16 @@ submit.addEventListener("click", submitAct, false);
 
 deleteButtons.forEach(element => {
     element.addEventListener("click", deleteItem, false)
+});
+
+successButtons.forEach(element => {
+    element.addEventListener("click", successItem, false);
+});
+
+resetButtons.forEach(element => {
+    element.addEventListener("click", resetItem, false);
+});
+
+removeButtons.forEach(element => {
+    element.addEventListener("click", removeItem, false);
 });
