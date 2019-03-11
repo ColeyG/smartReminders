@@ -9,6 +9,7 @@ font-family: 'Open Sans', sans-serif;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow-y: scroll;
 }
 .list{
     margin:10px;
@@ -20,6 +21,7 @@ font-family: 'Open Sans', sans-serif;
     justify-content: center;
     align-items:center;
     flex-direction: column;
+    min-height:300px;
 }
 input{
     margin:10px;
