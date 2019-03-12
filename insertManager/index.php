@@ -52,10 +52,10 @@
                             echo "<td>";
                             echo "<a href='#' class='delete' id='";
                             echo $row['todo_id'];
-                            echo "'>❌</a>";
+                            echo "'><img src='images/cross.svg'></a>";
                             echo "<a href='#' class='complete' id='";
                             echo $row['todo_id'];
-                            echo "'>✔️</a>";
+                            echo "'><img src='images/check.svg'></a>";
                             echo "</td>";
                             echo "</tr>";
                         }
@@ -83,10 +83,10 @@
                             echo "<td>";
                             echo "<a href='#' class='remove' id='";
                             echo $row['todo_id'];
-                            echo "'>🚫</a>";
+                            echo "'><img src='images/delete.svg'></a>";
                             echo "<a href='#' class='reset' id='";
                             echo $row['todo_id'];
-                            echo "'>🔺</a>";
+                            echo "'><img src='images/up.svg'></a>";
                             echo "</td>";
                             echo "</tr>";
                         }

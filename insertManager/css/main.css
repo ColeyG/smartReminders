@@ -70,35 +70,12 @@ label{
 }
 .items table tbody tr td{
     text-align: center;
-    padding-top:5px;
 }
-.delete{
+.delete,.complete,.reset,.remove{
     margin-left:5px;
     margin-right:5px;
     cursor: pointer;
     text-decoration:none;
-    color: red;
-}
-.complete{
-    margin-left:5px;
-    margin-right:5px;
-    cursor: pointer;
-    text-decoration:none;
-    color: green;
-}
-.reset{
-    margin-left:5px;
-    margin-right:5px;
-    cursor: pointer;
-    text-decoration:none;
-    color: green;
-}
-.remove{
-    margin-left:5px;
-    margin-right:5px;
-    cursor: pointer;
-    text-decoration:none;
-    color: green;
 }
 @media (max-width:800px){
     .list{
