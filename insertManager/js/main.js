@@ -10,24 +10,28 @@ let removeButtons = document.querySelectorAll('.remove');
 
 function returned(data) {
     console.log(data);
-    if (data = "success") {
+    if (data == "success") {
         location.reload(true);
     }
 }
 
-function deleteItem() {
+function deleteItem(e) {
+    e.preventDefault();
     coldAjax("GET", "php/delete.php?id=" + this.id + "&code=2", returned);
 }
 
-function successItem() {
+function successItem(e) {
+    e.preventDefault();
     coldAjax("GET", "php/delete.php?id=" + this.id + "&code=1", returned);
 }
 
-function resetItem() {
+function resetItem(e) {
+    e.preventDefault();
     coldAjax("GET", "php/delete.php?id=" + this.id + "&code=0", returned);
 }
 
-function removeItem() {
+function removeItem(e) {
+    e.preventDefault();
     coldAjax("GET", "php/delete.php?id=" + this.id + "&code=3", returned);
 }
 

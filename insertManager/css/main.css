@@ -22,6 +22,7 @@ font-family: 'Open Sans', sans-serif;
     align-items:center;
     flex-direction: column;
     min-height:300px;
+    margin-top:100px;
 }
 input{
     margin:10px;
@@ -67,9 +68,11 @@ label{
 }
 .items table thead tr th{
     border-bottom:3px solid rgba(0,0,0,.75);
+    vertical-align: middle;
 }
 .items table tbody tr td{
     text-align: center;
+    vertical-align: middle;
 }
 .delete,.complete,.reset,.remove{
     margin-left:5px;
